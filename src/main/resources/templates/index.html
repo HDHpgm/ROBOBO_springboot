@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="/fragment/layout">
+<head>
+    <title>ROBOBO Management</title>
+    <link th:href="@{/css/timeline.css}" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            getLastMessages();
+        });
+
+        function getLastMessages() {
+            // 1. 기존 메모 내용을 지웁니다.
+            $('#cards-box').empty();
+            // 2. 메모 목록을 불러와서 HTML로 붙입니다.
+            $.ajax({
+                type: 'GET',
+                url: '/api/lastmemo',
+                success: function (response) {
+                    let memo = response;
+                    let id = memo.id;
+                    let username = memo.username;
+                    let contents = memo.contents;
+                    let modifiedAt = memo.modifiedAt;
+                    modifiedAt = modifiedAt.substring(0, 10) + " / " + modifiedAt.substring(11, 19);
+                    addHTML(id, username, contents, modifiedAt);
+                }
+            })
+        }
+
+        // 메모 하나를 HTML로 만들어서 body 태그 내 원하는 곳에 붙입니다.
+        function addHTML(id, username, contents, modifiedAt) {
+            // 1. HTML 태그를 만듭니다.
+            let temp_html = `<div class="card">
+                                <!-- date/username 영역 -->
+                                <div class="metadata">
+                                    <div class="date">
+                                        ${modifiedAt}
+                                    </div>
+                                    <div id="${id}-username" class="username">
+                                        ${username}
+                                    </div>
+                                </div>
+                                <!-- contents 조회/수정 영역-->
+                                <div class="contents">
+                                    <div id="${id}-contents" class="text">
+                                        ${contents}
+                                    </div>
+                                </div>
+                                <!-- 안내 영역 -->
+                                <div class="footer">
+                                </div>
+                            </div>
+                            <p>전체 글 조회, 수정, 삭제는 메뉴의 타임라인 서비스를 통해 이용하세요!</p>`;
+            // 2. #cards-box 에 HTML을 붙인다.
+            $('#cards-box').append(temp_html);
+        }
+    </script>
+</head>
+
+<!-- Begin Page Content -->
+<div layout:fragment="content" class="container-fluid">
+
+    <!-- 페이지 내용 헤드 -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h2 mb-0 text-gray-800">대시보드</h1>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+        <!-- 연결 Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                ROBOBO 연결하기
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <button onclick="onclickPower()" type="button" class="btn btn-primary mt-3"
+                                        id="power-btn">전원 켜기
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 타임라인 Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                오늘의 작업내역 업데이트 개수(타임라인)
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><p>0</p></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h2 mb-0 text-gray-800 mt-5">한눈에 보기</h1>
+    </div>
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h3 class="h4 mb-0 text-gray-800 mt-1 mr-5">타임라인 최근 작업내역</h3>
+    </div>
+    <div class="row" style="border: dotted; border-radius: 10px;">
+        <div id="cards-box" class="area-read mr-3">
+
+        </div>
+    </div>
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h3 class="h4 mb-0 text-gray-800 mt-5">스트리밍 - 로봇 팔 연결 시 화면 활성화</h3>
+    </div>
+
+    <div class="row" style="border: dotted; border-radius: 10px;">
+        <div>
+            <iframe width="350" height="350"
+                    src="http://192.168.0.15:5000/">
+            </iframe>
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h3 class="h6 mb-0 text-gray-800">큰 화면은 메뉴의 스트리밍 서비스를 통해 이용해주세요!</h3>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- /.container-fluid -->
+
+
+</html>
