@@ -106,14 +106,14 @@ textarea.field::placeholder {
     color: #868e96;
 }
 
-.card {
+.card-timeline {
     width: 538px;
     border-radius: 5px;
     background-color: #ffffff;
     margin-bottom: 12px;
 }
 
-.card .metadata {
+.card-timeline .metadata {
     position: relative;
     display: flex;
     font-family: 'Spoqa Han Sans';
@@ -129,11 +129,11 @@ textarea.field::placeholder {
     padding: 10px 23px;
 }
 
-.card .metadata .date {
+.card-timeline .metadata .date {
 
 }
 
-.card .metadata .username {
+.card-timeline .metadata .username {
     margin-left: 20px;
 }
 

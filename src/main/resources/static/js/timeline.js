@@ -103,7 +103,7 @@ function getLastMessages() {
 // 메모 하나를 HTML로 만들어서 body 태그 내 원하는 곳에 붙입니다.
 function addHTML(id, username, contents, modifiedAt) {
     // 1. HTML 태그를 만듭니다.
-    let temp_html = `<div class="card">
+    let temp_html = `<div class="card-timeline">
                                 <!-- date/username 영역 -->
                                 <div class="metadata">
                                     <div class="date">
