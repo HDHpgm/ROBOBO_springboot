@@ -1,6 +1,33 @@
+
+function hideall() {
+    $("#tab").hide();
+    $("#tab1").hide();
+    $("#tab2").hide();
+    $("#tab3").hide();
+    $("#tab4").hide();
+}
+
 $(document).ready(function () {
     getLastMessages();
     numberOfLastMemo();
+    $("#icon1").mouseover(function () {
+        hideall();
+        $("#tab1").css("display", "block");
+    });
+
+    $("#icon2").mouseover(function () {
+        hideall();
+        $("#tab2").css("display", "block");
+    });
+
+    $("#icon3").mouseover(function () {
+        hideall();
+        $("#tab3").css("display", "block");
+    });
+
+    hideall();
+    $("#tab").show();
+
 });
 
 function getLastMessages() {
@@ -16,23 +43,27 @@ function getLastMessages() {
             let username = memo.username;
             let contents = memo.contents;
             let modifiedAt = memo.modifiedAt;
+            let email = memo.userEmail;
             modifiedAt = modifiedAt.substring(0, 10) + " / " + modifiedAt.substring(11, 19);
-            addHTML(id, username, contents, modifiedAt);
+            addHTML(id, username, contents, modifiedAt, email);
         }
     })
 }
 
 // 메모 하나를 HTML로 만들어서 body 태그 내 원하는 곳에 붙입니다.
-function addHTML(id, username, contents, modifiedAt) {
+function addHTML(id, username, contents, modifiedAt, email) {
     // 1. HTML 태그를 만듭니다.
-    let temp_html = `<div class="card-timeline">
+    let temp_html = `<div class="card-timeline" style="width: 500px">
                                 <!-- date/username 영역 -->
                                 <div class="metadata">
-                                    <div class="date">
+                                    <div class="date_timeline">
                                         ${modifiedAt}
                                     </div>
                                     <div id="${id}-username" class="username">
                                         ${username}
+                                    </div>
+                                    <div id="${id}-useremail" class="username">
+                                        ${email}
                                     </div>
                                 </div>
                                 <!-- contents 조회/수정 영역-->

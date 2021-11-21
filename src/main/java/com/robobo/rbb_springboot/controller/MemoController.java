@@ -40,6 +40,16 @@ public class MemoController {
         return "timeline";
     }
 
+    @GetMapping("api/memos/getUserName")
+    public @ResponseBody String getUserName(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        return principalDetails.getUsername();
+    }
+
+    @GetMapping("api/memos/getUserEmail")
+    public @ResponseBody String getUserEmail(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        return principalDetails.getUserEmail();
+    }
+
     @PostMapping("/api/memos")
     public @ResponseBody Memo createMemo(@RequestBody MemoRequestDto requestDto) {
         Memo memo = new Memo(requestDto);
@@ -48,10 +58,6 @@ public class MemoController {
 
     @GetMapping("/api/memos")
     public @ResponseBody List<Memo> readMemo() {
-//        LocalDateTime now = LocalDateTime.now();
-//        LocalDateTime before24Hour = LocalDateTime.now().minusDays(1);
-//        return memoRepository.findAllByModifiedAtBetweenOrderByModifiedAtDesc(now , before24Hour);
-
         return memoRepository.findAll(Sort.by(Sort.Direction.DESC, "modifiedAt"));
     }
 

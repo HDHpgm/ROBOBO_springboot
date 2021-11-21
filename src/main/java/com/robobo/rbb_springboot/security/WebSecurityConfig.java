@@ -36,8 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                    .antMatchers("/","/css/**","/js/**", "/scss/**",
 //                            "/vendor/**","/img/**","/h2-console/**","/user/register").permitAll()
                     .antMatchers("/admin").access("hasRole('ROLE_ADMIN')")
-                        // 그 외 모든 요청은 인증과정 필요
-
+//                    .antMatchers("/memo").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
                         .anyRequest().permitAll()
                         .and()
                     .formLogin()
