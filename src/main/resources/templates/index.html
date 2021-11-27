@@ -27,7 +27,7 @@
                             <p>사용자 인증 후 위의 연결하기 버튼을 클릭하면 컨트롤러와 연결을 시작합니다.</p>
                             <p>작은 화면의 미리보기가 제공되지만, 큰 화면을 원한다면 왼쪽메뉴를 이용하세요</p>
                         </div>
-                        <div class="right_img"><iframe width="360" height="270" src="http://192.168.0.15:5000/"></iframe></div>
+                        <div class="right_img"><iframe width="360" height="270" src="http://192.168.0.8:5000/"></iframe></div>
                     </div>
                     <div class="box1" id="tab1">
                         <div class="center_text">
@@ -36,7 +36,7 @@
                             <p>사용자 인증 후 위의 연결하기 버튼을 클릭하면 컨트롤러와 연결을 시작합니다.</p>
                             <p>작은 화면의 미리보기가 제공되지만, 큰 화면을 원한다면 왼쪽메뉴를 이용하세요</p>
                         </div>
-                        <div class="right_img"><iframe width="360" height="270" src="http://192.168.0.15:5000/"></iframe></div>
+                        <div class="right_img"><iframe width="360" height="270" src="http://192.168.0.8:5000/"></iframe></div>
                     </div>
                     <div class="box1" id="tab2">
                         <div class="center_text">
@@ -52,7 +52,7 @@
                             <p>연락이 닿지 않을때, 작업에 열중하고 있는 상대방에게 메시지를 보내보세요</p>
                             <p>1:1 채팅을 제공합니다.</p>
                         </div>
-                        <div class="right_img"><img th:src="@{img/pic3.jpg}"></div>
+                        <div class="right_img"><img th:width="360" th:height="270" th:src="@{img/chat.png}"></div>
                     </div>
                     <ul class="center_button_icons tabset mt-5">
                         <li id="icon1" class="mr-3"><a href="#tab1" class="tab"> <img style="width: 90px; height: 90px;"
@@ -86,9 +86,13 @@
                                             ROBOBO 연결하기
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <button onclick="onclickPower()" type="button"
+                                            <button onclick="onclickPower1()" type="button"
                                                     class="btn btn-primary mt-3"
-                                                    id="power-btn">전원 켜기
+                                                    id="power-btn1">연결1
+                                            </button>
+                                            <button onclick="onclickPower2()" type="button"
+                                                    class="btn btn-primary mt-3"
+                                                    id="power-btn2">연결2
                                             </button>
                                         </div>
                                     </div>
